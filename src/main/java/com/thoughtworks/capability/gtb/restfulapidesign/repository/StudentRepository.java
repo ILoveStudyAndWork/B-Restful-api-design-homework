@@ -15,4 +15,6 @@ public interface StudentRepository {
     List<Student> findAll();
 
     Student findById(int id);
+
+    List<Student> findByGender(String gender);
 }

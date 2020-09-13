@@ -25,8 +25,12 @@ public class StudentService {
         return studentRepository.save(registerStu);
     }
 
-    public List<Student> getStudents() {
-        return studentRepository.findAll();
+    public List<Student> getStudents(String gender) {
+        if (gender == null){
+            return studentRepository.findAll();
+        }
+        else
+            return studentRepository.findByGender(gender);
     }
 
     public Student getStudentById(int id) {

@@ -5,6 +5,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 @Repository
 public class StudentRepositoryImpl implements StudentRepository{
     private static List<Student> students = null;
@@ -37,5 +39,11 @@ public class StudentRepositoryImpl implements StudentRepository{
                 .orElse(null);
     }
 
+    @Override
+    public List<Student> findByGender(String gender) {
+        return students.stream()
+                .filter(student -> student.getGender().equals(gender))
+                .collect(Collectors.toList());
+    }
 
 }

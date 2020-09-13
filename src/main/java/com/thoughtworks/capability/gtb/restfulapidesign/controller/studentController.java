@@ -23,8 +23,8 @@ public class studentController {
     }
 
     @GetMapping("/students")
-    public List<Student> getStudents(){
-        return studentService.getStudents();
+    public List<Student> getStudents(@RequestParam(required = false) String gender){
+        return studentService.getStudents(gender);
     }
 
     @GetMapping("/students/{id}")
