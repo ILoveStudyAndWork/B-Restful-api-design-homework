@@ -18,7 +18,7 @@ public class StudentRepositoryImpl implements StudentRepository{
 
     @Override
     public int count() {
-        return students.size()+1;
+        return students.size();
     }
 
     @Override
@@ -34,6 +34,7 @@ public class StudentRepositoryImpl implements StudentRepository{
         } else {
             students.add(student);
         }
+
         return students.stream()
                 .filter(stu -> stu.getId() == student.getId())
                 .findAny()

@@ -1,6 +1,8 @@
 package com.thoughtworks.capability.gtb.restfulapidesign.controller;
 
+import com.thoughtworks.capability.gtb.restfulapidesign.domain.Group;
 import com.thoughtworks.capability.gtb.restfulapidesign.domain.Student;
+import com.thoughtworks.capability.gtb.restfulapidesign.exception.StudentListEmptyException;
 import com.thoughtworks.capability.gtb.restfulapidesign.service.StudentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +37,16 @@ public class studentController {
     @PatchMapping("/students/{id}")
     public Student updateStudent(@RequestBody Student student,@PathVariable int id){
         return studentService.updateStudent(id,student);
+    }
+
+    @PostMapping("/students/groups")
+    public List<Group> GroupStudent() throws StudentListEmptyException {
+        return studentService.groupStudent();
+    }
+
+    @PatchMapping("/students/groups/{id}")
+    public Group updateStudent(@RequestBody Group group,@PathVariable int id){
+        return studentService.updateGroup(id,group);
     }
 
 }
