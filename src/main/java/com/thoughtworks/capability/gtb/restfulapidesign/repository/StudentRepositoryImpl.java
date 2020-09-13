@@ -29,5 +29,13 @@ public class StudentRepositoryImpl implements StudentRepository{
         return students;
     }
 
+    @Override
+    public Student findById(int id) {
+        return students.stream()
+                .filter(student -> student.getId() == id)
+                .findAny()
+                .orElse(null);
+    }
+
 
 }

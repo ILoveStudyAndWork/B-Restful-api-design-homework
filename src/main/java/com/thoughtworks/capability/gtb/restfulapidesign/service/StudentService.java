@@ -28,4 +28,8 @@ public class StudentService {
     public List<Student> getStudents() {
         return studentRepository.findAll();
     }
+
+    public Student getStudentById(int id) {
+        return studentRepository.findById(id);
+    }
 }

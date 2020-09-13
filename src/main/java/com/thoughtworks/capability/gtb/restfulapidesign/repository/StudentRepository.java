@@ -13,4 +13,6 @@ public interface StudentRepository {
     Student save(Student registerStu);
 
     List<Student> findAll();
+
+    Student findById(int id);
 }
