@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
-public class StudentRepositoryImpl implements StudentRepository{
+public class StudentRepositoryImpl implements StudentRepository {
     private static List<Student> students = null;
 
     public StudentRepositoryImpl() {
@@ -26,7 +26,7 @@ public class StudentRepositoryImpl implements StudentRepository{
         Optional<Student> studentExist = students.stream()
                 .filter(stu -> stu.getId() == student.getId())
                 .findAny();
-        if (studentExist.isPresent()){
+        if (studentExist.isPresent()) {
             Student stuUpdate = studentExist.get();
             stuUpdate.setGender(student.getGender());
             stuUpdate.setName(student.getName());
@@ -61,4 +61,12 @@ public class StudentRepositoryImpl implements StudentRepository{
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public void deleteById(int id) {
+        Student studentToBeDelete = students.stream()
+                .filter(student -> student.getId() == id)
+                .findAny()
+                .get();
+        students.remove(studentToBeDelete);
+    }
 }

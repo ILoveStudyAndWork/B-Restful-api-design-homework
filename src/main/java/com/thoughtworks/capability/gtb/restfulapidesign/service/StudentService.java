@@ -2,6 +2,7 @@ package com.thoughtworks.capability.gtb.restfulapidesign.service;
 
 import com.thoughtworks.capability.gtb.restfulapidesign.domain.Group;
 import com.thoughtworks.capability.gtb.restfulapidesign.domain.Student;
+import com.thoughtworks.capability.gtb.restfulapidesign.exception.NoSuchStudentException;
 import com.thoughtworks.capability.gtb.restfulapidesign.exception.StudentListEmptyException;
 import com.thoughtworks.capability.gtb.restfulapidesign.repository.GroupRepository;
 import com.thoughtworks.capability.gtb.restfulapidesign.repository.StudentRepository;
@@ -82,5 +83,13 @@ public class StudentService {
 
     public List<Group> getGroupStudent() {
         return groupRepository.findAll();
+    }
+
+    public void deleteStudentById(int id) throws NoSuchStudentException {
+        Student student = studentRepository.findById(id);
+        if (student == null) {
+            throw new NoSuchStudentException();
+        }
+        studentRepository.deleteById(id);
     }
 }

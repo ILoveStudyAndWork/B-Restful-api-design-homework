@@ -17,4 +17,6 @@ public interface StudentRepository {
     Student findById(int id);
 
     List<Student> findByGender(String gender);
+
+    void deleteById(int id);
 }
