@@ -79,4 +79,8 @@ public class StudentService {
         groupToBeUpdate.setGroupName(group.getGroupName());
         return groupRepository.save(groupToBeUpdate);
     }
+
+    public List<Group> getGroupStudent() {
+        return groupRepository.findAll();
+    }
 }

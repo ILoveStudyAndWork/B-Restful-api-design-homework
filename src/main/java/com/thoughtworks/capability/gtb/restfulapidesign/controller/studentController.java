@@ -49,4 +49,9 @@ public class studentController {
         return studentService.updateGroup(id,group);
     }
 
+    @GetMapping("/students/groups")
+    public List<Group> getStudentGroup(){
+        return studentService.getGroupStudent();
+    }
+
 }
