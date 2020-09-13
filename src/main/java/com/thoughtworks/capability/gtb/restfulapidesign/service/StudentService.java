@@ -2,6 +2,8 @@ package com.thoughtworks.capability.gtb.restfulapidesign.service;
 
 import com.thoughtworks.capability.gtb.restfulapidesign.domain.Group;
 import com.thoughtworks.capability.gtb.restfulapidesign.domain.Student;
+import com.thoughtworks.capability.gtb.restfulapidesign.exception.RequestGroupNameEmptyException;
+import com.thoughtworks.capability.gtb.restfulapidesign.exception.GroupNameExistException;
 import com.thoughtworks.capability.gtb.restfulapidesign.exception.NoSuchStudentException;
 import com.thoughtworks.capability.gtb.restfulapidesign.exception.StudentListEmptyException;
 import com.thoughtworks.capability.gtb.restfulapidesign.repository.GroupRepository;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class StudentService {
@@ -75,10 +78,26 @@ public class StudentService {
         return groupRepository.findAll();
     }
 
-    public Group updateGroup(int id, Group group) {
+    public Group updateGroup(int id, Group group) throws Exception {
+        validateGroupName(group.getGroupName());
         Group groupToBeUpdate = groupRepository.findById(id);
         groupToBeUpdate.setGroupName(group.getGroupName());
         return groupRepository.save(groupToBeUpdate);
+    }
+
+    private void validateGroupName(String groupName) throws RequestGroupNameEmptyException, GroupNameExistException {
+        if (groupName == null){
+            throw new RequestGroupNameEmptyException();
+        }
+
+        Optional<Group> groupExist = groupRepository.findAll()
+                .stream()
+                .filter(group -> groupName.equals(group.getGroupName()))
+                .findAny();
+
+        if (groupExist.isPresent()){
+            throw new GroupNameExistException();
+        }
     }
 
     public List<Group> getGroupStudent() {

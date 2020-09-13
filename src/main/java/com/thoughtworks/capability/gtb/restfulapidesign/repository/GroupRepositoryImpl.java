@@ -13,7 +13,7 @@ public class GroupRepositoryImpl implements GroupRepository{
     private static List<Group> groups = null;
     public GroupRepositoryImpl() {
         groups = new ArrayList<>();
-        for (int i = 1; i < GROUP_SIZE ;i++){
+        for (int i = 1; i <= GROUP_SIZE ;i++){
             Group group = new Group(i ,"Team " + i,new ArrayList<>(), "Team " + i);
             groups.add(group);
         }
@@ -46,10 +46,8 @@ public class GroupRepositoryImpl implements GroupRepository{
 
     @Override
     public void reSet() {
-        groups = new ArrayList<>();
-        for (int i = 1; i <= GROUP_SIZE ;i++){
-            Group group = new Group(i ,"Team " + i,new ArrayList<>(), "Team " + i);
-            groups.add(group);
+        for (int i = 0; i < GROUP_SIZE ;i++){
+            groups.get(i).getStudentList().clear();
         }
     }
 

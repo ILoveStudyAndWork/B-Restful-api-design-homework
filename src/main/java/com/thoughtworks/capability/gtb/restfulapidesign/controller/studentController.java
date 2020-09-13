@@ -51,7 +51,7 @@ public class studentController {
     }
 
     @PatchMapping("/students/groups/{id}")
-    public Group updateStudent(@RequestBody Group group,@PathVariable int id){
+    public Group updateStudent(@RequestBody Group group,@PathVariable int id) throws Exception {
         return studentService.updateGroup(id,group);
     }
 
