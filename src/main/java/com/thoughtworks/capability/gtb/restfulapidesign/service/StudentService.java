@@ -36,4 +36,14 @@ public class StudentService {
     public Student getStudentById(int id) {
         return studentRepository.findById(id);
     }
+
+    public Student updateStudent(int id, Student student) {
+        Student updateStu = Student.builder()
+                .id(id)
+                .name(student.getName())
+                .gender(student.getGender())
+                .note(student.getNote())
+                .build();
+        return studentRepository.save(updateStu);
+    }
 }

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
@@ -21,9 +22,22 @@ public class StudentRepositoryImpl implements StudentRepository{
     }
 
     @Override
-    public Student save(Student registerStu) {
-        students.add(registerStu);
-        return registerStu;
+    public Student save(Student student) {
+        Optional<Student> studentExist = students.stream()
+                .filter(stu -> stu.getId() == student.getId())
+                .findAny();
+        if (studentExist.isPresent()){
+            Student stuUpdate = studentExist.get();
+            stuUpdate.setGender(student.getGender());
+            stuUpdate.setName(student.getName());
+            stuUpdate.setNote(student.getNote());
+        } else {
+            students.add(student);
+        }
+        return students.stream()
+                .filter(stu -> stu.getId() == student.getId())
+                .findAny()
+                .orElse(null);
     }
 
     @Override

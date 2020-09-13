@@ -32,4 +32,9 @@ public class studentController {
         return studentService.getStudentById(id);
     }
 
+    @PatchMapping("/students/{id}")
+    public Student updateStudent(@RequestBody Student student,@PathVariable int id){
+        return studentService.updateStudent(id,student);
+    }
+
 }
